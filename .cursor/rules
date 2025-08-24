@@ -1,0 +1,393 @@
+# Agentic Todo List - Cursor Rules
+# This file contains project-specific rules for Cursor AI assistant
+
+## PROJECT OVERVIEW
+This is a monorepo using Yarn workspaces with:
+- Backend: NestJS with TypeORM, PostgreSQL
+- Frontend: NextJS with React, TypeScript, Tailwind CSS
+- Shared: Common utilities, types, and constants
+
+## ARCHITECTURE RULES
+
+### Monorepo Structure
+- Always respect the workspace structure: `packages/backend`, `packages/frontend`, `packages/shared`
+- Use `@agentic-todo-list/*` naming convention for internal imports
+- Maintain clear separation between frontend, backend, and shared code
+- When adding new features, consider which package they belong to
+
+### Backend (NestJS) Rules
+- Follow NestJS module pattern: Controller → Service → Repository → Entity
+- Use dependency injection with `@Injectable()` decorators
+- Implement proper DTOs with class-validator decorators
+- Use TypeORM entities extending BaseEntity
+- Follow naming: `*.module.ts`, `*.controller.ts`, `*.service.ts`, `*.entity.ts`
+- Use global interceptors and filters for cross-cutting concerns
+- Implement proper error handling with HttpExceptionFilter
+
+### Frontend (NextJS) Rules
+- Use functional components with TypeScript
+- Implement custom hooks for business logic (`use*` pattern)
+- Use React Context for global state management
+- Follow component composition pattern
+- Use Tailwind CSS for styling
+- Implement proper error boundaries and loading states
+- Use proper TypeScript interfaces for props and state
+
+### Shared Package Rules
+- Export all types, utilities, and constants through barrel exports
+- Keep utilities pure and stateless
+- Use comprehensive TypeScript interfaces
+- Maintain backward compatibility in shared APIs
+- Use proper logging with Winston/console fallback
+
+## CODING STANDARDS
+
+### TypeScript
+- Use strict TypeScript configuration
+- Prefer interfaces over types for object shapes
+- Use proper generic types where applicable
+- Implement proper error types and handling
+- Use const assertions for immutable data
+
+### Naming Conventions
+- Use PascalCase for components, classes, interfaces, types
+- Use camelCase for variables, functions, methods
+- Use kebab-case for file names and URLs
+- Use UPPER_SNAKE_CASE for constants
+- Use descriptive names that explain intent
+
+### File Organization
+- Group related files in feature folders
+- Use index files for barrel exports
+- Keep files focused on single responsibility
+- Use proper file extensions (.ts, .tsx, .d.ts)
+
+### Import/Export Rules
+- Use named exports over default exports
+- Group imports: external libraries, internal modules, relative imports
+- Use absolute imports for shared package
+- Avoid circular dependencies
+
+## DESIGN PATTERNS
+
+### Backend Patterns
+- **Dependency Injection**: Use NestJS DI container
+- **Repository Pattern**: Implement for data access
+- **DTO Pattern**: Use for request/response validation
+- **Interceptor Pattern**: Use for cross-cutting concerns
+- **Filter Pattern**: Use for global error handling
+
+### Frontend Patterns
+- **Custom Hooks**: Extract reusable logic
+- **Context Pattern**: Use for global state
+- **Component Composition**: Build complex UIs from simple components
+- **Render Props/HOCs**: Use sparingly, prefer hooks
+
+### Shared Patterns
+- **Singleton**: Use for logger instances
+- **Factory**: Use for creating complex objects
+- **Utility Functions**: Keep pure and stateless
+
+## API DESIGN
+
+### RESTful Endpoints
+- Use proper HTTP methods (GET, POST, PUT, DELETE, PATCH)
+- Implement proper status codes
+- Use consistent URL patterns
+- Implement proper error responses
+- Use pagination for list endpoints
+
+### Data Validation
+- Use class-validator decorators in DTOs
+- Implement proper error messages
+- Use Zod for frontend validation
+- Validate both request and response data
+
+## ERROR HANDLING
+
+### Backend Error Handling
+- Use HttpException for HTTP errors
+- Implement global exception filter
+- Log errors with proper context
+- Return consistent error response format
+- Use proper HTTP status codes
+
+### Frontend Error Handling
+- Implement error boundaries
+- Use try-catch for async operations
+- Display user-friendly error messages
+- Log errors for debugging
+- Implement retry mechanisms
+
+## TESTING
+
+### Backend Testing
+- Write unit tests for services
+- Write integration tests for controllers
+- Use Jest as testing framework
+- Mock external dependencies
+- Test error scenarios
+
+### Frontend Testing
+- Write component tests
+- Test custom hooks
+- Test user interactions
+- Use React Testing Library
+- Test error states
+
+## PERFORMANCE
+
+### Backend Performance
+- Use proper database indexing
+- Implement caching where appropriate
+- Use pagination for large datasets
+- Optimize database queries
+- Use compression middleware
+
+### Frontend Performance
+- Implement code splitting
+- Use React.memo for expensive components
+- Optimize bundle size
+- Use proper loading states
+- Implement virtual scrolling for large lists
+
+## SECURITY
+
+### Backend Security
+- Validate all inputs
+- Use proper authentication/authorization
+- Implement rate limiting
+- Use HTTPS in production
+- Sanitize user inputs
+- Use environment variables for secrets
+
+### Frontend Security
+- Sanitize user inputs
+- Use HTTPS for API calls
+- Implement proper CORS
+- Avoid XSS vulnerabilities
+- Use secure storage for sensitive data
+
+## ENVIRONMENT & CONFIGURATION
+
+### Environment Variables
+- Use `.env.example` for documentation
+- Use proper naming conventions
+- Use `NEXT_PUBLIC_` prefix for frontend
+- Validate environment variables
+- Use different configs for different environments
+
+### Docker Configuration
+- Use multi-stage builds
+- Optimize image sizes
+- Use proper base images
+- Implement health checks
+- Use docker-compose for local development
+
+## DEPLOYMENT
+
+### Backend Deployment
+- Use proper build process
+- Implement health checks
+- Use environment-specific configs
+- Implement proper logging
+- Use process managers (PM2)
+
+### Frontend Deployment
+- Optimize build output
+- Use CDN for static assets
+- Implement proper caching
+- Use environment variables
+- Monitor performance
+
+## MONITORING & LOGGING
+
+### Logging
+- Use structured logging
+- Log at appropriate levels
+- Include context in log messages
+- Use correlation IDs
+- Implement log rotation
+
+### Monitoring
+- Monitor application health
+- Track performance metrics
+- Monitor error rates
+- Set up alerts
+- Use APM tools
+
+## DOCUMENTATION
+
+### Code Documentation
+- Use JSDoc for functions and classes
+- Document complex business logic
+- Keep README files updated
+- Document API endpoints
+- Use inline comments sparingly
+
+### API Documentation
+- Use Swagger/OpenAPI
+- Document all endpoints
+- Include request/response examples
+- Document error responses
+- Keep documentation updated
+
+## GIT WORKFLOW
+
+### Commit Messages
+- Use conventional commit format
+- Write descriptive commit messages
+- Reference issue numbers
+- Keep commits atomic
+- Use proper branch naming
+
+### Branch Strategy
+- Use feature branches
+- Implement code review process
+- Use proper merge strategies
+- Keep main branch stable
+- Use semantic versioning
+
+## SPECIFIC PROJECT RULES
+
+### Todo Feature
+- Todos have: id, title, description, completed, priority, dueDate, timestamps
+- Priority levels: 'low', 'medium', 'high'
+- Implement proper filtering and sorting
+- Use optimistic updates for better UX
+- Implement proper validation
+
+### Database Schema
+- Use PostgreSQL as primary database
+- Implement proper migrations
+- Use TypeORM for ORM
+- Implement proper indexing
+- Use transactions for data integrity
+
+### Frontend State Management
+- Use React Context for global state
+- Use local state for component-specific state
+- Implement proper loading states
+- Handle error states gracefully
+- Use optimistic updates
+
+### API Integration
+- Use Axios for HTTP requests
+- Implement proper error handling
+- Use interceptors for common headers
+- Implement request/response logging
+- Use proper timeout configurations
+
+## COMMON PITFALLS TO AVOID
+
+### Backend Pitfalls
+- Don't expose sensitive data in responses
+- Don't use synchronous operations for I/O
+- Don't ignore error handling
+- Don't use hardcoded values
+- Don't skip input validation
+
+### Frontend Pitfalls
+- Don't mutate state directly
+- Don't ignore loading states
+- Don't forget error boundaries
+- Don't use inline styles
+- Don't ignore accessibility
+
+### Shared Pitfalls
+- Don't create circular dependencies
+- Don't export everything from index files
+- Don't ignore type safety
+- Don't use any types unnecessarily
+- Don't forget backward compatibility
+
+## TOOLS & CONFIGURATION
+
+### Development Tools
+- Use ESLint for code linting
+- Use Prettier for code formatting
+- Use TypeScript for type safety
+- Use Jest for testing
+- Use Husky for git hooks
+
+### Build Tools
+- Use Yarn for package management
+- Use TypeScript compiler
+- Use Webpack for bundling
+- Use Docker for containerization
+- Use docker-compose for orchestration
+
+## EMERGENCY PROCEDURES
+
+### When Things Go Wrong
+- Check logs first
+- Verify environment variables
+- Check database connectivity
+- Verify API endpoints
+- Check frontend console errors
+- Use debugging tools
+- Rollback to last known good state
+
+## CONTRIBUTION GUIDELINES
+
+### Before Submitting Code
+- Run linting and formatting
+- Run tests
+- Check for type errors
+- Verify functionality
+- Update documentation
+- Follow commit message conventions
+
+### Code Review Checklist
+- Check for security issues
+- Verify error handling
+- Check performance implications
+- Verify test coverage
+- Check for accessibility
+- Verify documentation updates
+
+## PROJECT-SPECIFIC COMMANDS
+
+### Development
+```bash
+# Start all services
+yarn dev
+
+# Start specific service
+yarn workspace @agentic-todo-list/backend dev
+yarn workspace @agentic-todo-list/frontend dev
+
+# Build all packages
+yarn build
+
+# Run tests
+yarn test
+
+# Lint and format
+yarn lint
+yarn format
+```
+
+### Docker
+```bash
+# Start all services
+yarn docker:up
+
+# Build images
+yarn docker:build
+
+# View logs
+yarn docker:logs
+
+# Stop services
+yarn docker:down
+```
+
+## REMEMBER
+- Always consider the monorepo structure
+- Maintain consistency across packages
+- Follow established patterns
+- Write maintainable and testable code
+- Keep security in mind
+- Document important decisions
+- Test thoroughly before deploying

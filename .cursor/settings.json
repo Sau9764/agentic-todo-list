@@ -1,0 +1,92 @@
+{
+  "projectName": "agentic-todo-list",
+  "description": "Monorepo with NestJS backend, NextJS frontend, and shared utilities",
+  "architecture": {
+    "type": "monorepo",
+    "workspaces": ["packages/backend", "packages/frontend", "packages/shared"],
+    "packageManager": "yarn"
+  },
+  "techStack": {
+    "backend": {
+      "framework": "NestJS",
+      "language": "TypeScript",
+      "database": "PostgreSQL",
+      "orm": "TypeORM",
+      "validation": "class-validator"
+    },
+    "frontend": {
+      "framework": "NextJS",
+      "language": "TypeScript",
+      "styling": "Tailwind CSS",
+      "stateManagement": "React Context + Custom Hooks"
+    },
+    "shared": {
+      "language": "TypeScript",
+      "logging": "Winston",
+      "utilities": "Custom utilities for date, string, validation, etc."
+    }
+  },
+  "conventions": {
+    "naming": {
+      "components": "PascalCase",
+      "functions": "camelCase",
+      "constants": "UPPER_SNAKE_CASE",
+      "files": "kebab-case"
+    },
+    "imports": {
+      "order": ["external", "internal", "relative"],
+      "sharedPackage": "@agentic-todo-list/shared"
+    }
+  },
+  "patterns": {
+    "backend": {
+      "module": "Controller → Service → Repository → Entity",
+      "decorators": "@Injectable(), @Controller(), @Get(), @Post()",
+      "validation": "class-validator decorators in DTOs"
+    },
+    "frontend": {
+      "components": "Functional components with TypeScript",
+      "hooks": "Custom hooks for business logic",
+      "state": "React Context for global state"
+    }
+  },
+  "fileStructure": {
+    "backend": {
+      "modules": "Feature-based modules",
+      "common": "Shared utilities, filters, interceptors",
+      "config": "Environment and database configuration"
+    },
+    "frontend": {
+      "components": "Reusable UI components",
+      "hooks": "Custom React hooks",
+      "context": "React Context providers",
+      "pages": "NextJS pages"
+    },
+    "shared": {
+      "types": "TypeScript interfaces and types",
+      "utils": "Pure utility functions",
+      "constants": "Application constants",
+      "logger": "Cross-platform logging"
+    }
+  },
+  "development": {
+    "commands": {
+      "dev": "yarn dev",
+      "build": "yarn build",
+      "test": "yarn test",
+      "lint": "yarn lint",
+      "format": "yarn format"
+    },
+    "docker": {
+      "up": "yarn docker:up",
+      "down": "yarn docker:down",
+      "logs": "yarn docker:logs"
+    }
+  },
+  "quality": {
+    "linting": "ESLint with TypeScript",
+    "formatting": "Prettier",
+    "testing": "Jest",
+    "typeChecking": "TypeScript strict mode"
+  }
+}
