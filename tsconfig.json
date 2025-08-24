@@ -1,25 +1,48 @@
 {
   "compilerOptions": {
-    "target": "ES2022",
-    "lib": ["ES2022"],
+    "target": "ES2020",
+    "module": "commonjs",
+    "lib": ["ES2020"],
     "allowJs": true,
-    "skipLibCheck": true,
+    "outDir": "./dist",
+    "rootDir": "./",
     "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "noEmit": true,
     "esModuleInterop": true,
-    "module": "esnext",
-    "moduleResolution": "node",
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "composite": true,
+    "noEmit": true,
     "resolveJsonModule": true,
-    "isolatedModules": true,
-    "jsx": "preserve",
-    "incremental": true,
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./packages/*/src"],
-      "@shared/*": ["./packages/shared/src/*"]
+      "@agentic-todo-list/shared": ["packages/shared/src"],
+      "@agentic-todo-list/shared/*": ["packages/shared/src/*"],
+      "@shared": ["packages/shared/src"],
+      "@shared/*": ["packages/shared/src/*"]
     }
   },
-  "include": ["packages/**/*"],
-  "exclude": ["node_modules", "dist", "build", ".next"]
+  "include": [
+    "packages/**/*",
+    "**/*.ts",
+    "**/*.tsx"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "build",
+    "**/*.spec.ts",
+    "**/*.test.ts"
+  ],
+  "references": [
+    { "path": "./packages/shared" },
+    { "path": "./packages/backend" },
+    { "path": "./packages/frontend" }
+  ]
 }
