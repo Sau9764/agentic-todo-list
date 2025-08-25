@@ -14,7 +14,7 @@ export const Layout: React.FC<LayoutProps> = ({
   title = APP_NAME,
   description = 'A modern todo list application built with Next.js and NestJS'
 }) => {
-  const { state } = useApp();
+  const { state, toggleTheme, clearError } = useApp();
 
   return (
     <>
@@ -23,12 +23,7 @@ export const Layout: React.FC<LayoutProps> = ({
         <meta name="description" content={description} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link 
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" 
-          rel="stylesheet" 
-        />
+        {/* Fonts are now loaded in _document.tsx */}
       </Head>
 
       <div className={`min-h-screen ${state.theme === 'dark' ? 'dark' : ''}`}>
@@ -47,8 +42,9 @@ export const Layout: React.FC<LayoutProps> = ({
               
               <nav className="flex items-center space-x-4">
                 <button
-                  onClick={() => {/* TODO: Implement theme toggle */}}
-                  className="p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100"
+                  onClick={toggleTheme}
+                  className="p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-gray-300 dark:hover:text-gray-100"
+                  aria-label={`Switch to ${state.theme === 'dark' ? 'light' : 'dark'} mode`}
                 >
                   {state.theme === 'dark' ? '🌞' : '🌙'}
                 </button>
@@ -68,7 +64,7 @@ export const Layout: React.FC<LayoutProps> = ({
         <footer className="bg-white border-t border-gray-200">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
             <div className="text-center text-sm text-gray-500">
-              <p>&copy; {new Date().getFullYear()} {APP_NAME}. All rights reserved.</p>
+              <p>&copy; 2025 {APP_NAME}. All rights reserved.</p>
             </div>
           </div>
         </footer>
@@ -90,7 +86,7 @@ export const Layout: React.FC<LayoutProps> = ({
               <span>⚠️</span>
               <span>{state.error}</span>
               <button
-                onClick={() => {/* TODO: Implement error clear */}}
+                onClick={clearError}
                 className="ml-2 text-white hover:text-red-200"
               >
                 ×

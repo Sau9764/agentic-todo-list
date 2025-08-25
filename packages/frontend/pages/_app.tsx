@@ -1,7 +1,7 @@
 import type { AppProps } from 'next/app';
 import { AppProvider } from '@/context/AppContext';
 import { Layout } from '@/components/Layout';
-// Global CSS is now imported in the root pages/_app.tsx
+import '../src/styles/globals.css';
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
